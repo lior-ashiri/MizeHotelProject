@@ -25,8 +25,14 @@ namespace MizeHotelProject.Storages.implementations
         public async Task<T> GetValue()
         {
             Console.WriteLine("try retive data from fileSystem service");
+            if (!File.Exists(_path)){
+                return null;
+            }
             var jsonString = await File.ReadAllTextAsync(_path);
-            Console.WriteLine(jsonString);
+            if (jsonString == string.Empty)
+            {
+                return null;
+            }
             var myObject = JsonSerializer.Deserialize<DataWithDate<T>>(jsonString);
             _expieryDate = myObject.Date;
             if (DateTime.Now > _expieryDate)

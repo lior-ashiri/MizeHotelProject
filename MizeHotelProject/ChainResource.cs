@@ -21,7 +21,7 @@ namespace MizeHotelProject
         }
         public async Task<T> GetValue()
         {
-            var storagesToUpdate = new List<IReadWriteAbleStorage<T>>();
+            var storagesToUpdate = new Stack<IReadWriteAbleStorage<T>>();
             T result = null;
             foreach (var storage in _readWriteStorages)
             {
@@ -32,7 +32,7 @@ namespace MizeHotelProject
                 result = await storage.GetValue();
                 if (result==null)
                 {
-                    storagesToUpdate.Add(storage);
+                    storagesToUpdate.Push(storage);
                 }
             }
             if (result == null)
@@ -41,7 +41,11 @@ namespace MizeHotelProject
             }
             if (result != null)
             {
-                storagesToUpdate.ForEach(x=>x.Overrite(result));
+                while (storagesToUpdate.Count > 0)
+                {
+                    var storge = storagesToUpdate.Pop();
+                    await storge.Overrite(result);
+                }
             }
             return result;
         }

@@ -12,5 +12,6 @@ namespace MizeHotelProject
         public const string myAppIDInOpenExchange = "217452e921dc4bb3b83518de43c9806f";
         public const string pathToOpehExchange = $"https://openexchangerates.org/api/latest.json?app_id=" + myAppIDInOpenExchange;
         public const string pathToJson = @"..\..\..\..\MizeHotelProject\data.Json";
+        public const string DataSourceToTestOnlyPath = @"..\..\..\..\MizeHotelProject\dataSourceForTestingOnly.Json";
     }
 }
