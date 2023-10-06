@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MizeHotelProject
 {
-    public class ChainResource<T> : IChainResource<T> where T : class
+    public class ChainResource<T> where T : class
     {
         private readonly List<IReadableStorage<T>> _readOnlyStorages;
         private readonly List<IReadWriteAbleStorage<T>> _readWriteStorages;
