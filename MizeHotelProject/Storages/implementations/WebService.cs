@@ -31,7 +31,6 @@ namespace MizeHotelProject.Storages.implementations
                 {
                     string stringContent = await response.Content.ReadAsStringAsync();
                     var objectContent = JsonSerializer.Deserialize<T>(stringContent);
-                    Console.WriteLine(stringContent);
                     Console.WriteLine("retrive data from web service");
                     return objectContent;
                 }

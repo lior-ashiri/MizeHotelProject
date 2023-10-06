@@ -11,14 +11,6 @@ var webService = new WebService<ExchangeRate>(Consts.pathToOpehExchange);
 var List = new List<IReadableStorage<ExchangeRate>>() { memoryService, fileSystemService, webService };
 
 var chain = new ChainResource<ExchangeRate>(List);
-await chain.GetValue();
-var valMem = await memoryService.GetValue();
-if (valMem == null)
-{
-    var val = await fileSystemService.GetValue();
-    Console.WriteLine(JsonSerializer.Serialize(val));
-    await memoryService.Overrite(val);
-    valMem = await memoryService.GetValue();
-    Console.WriteLine(JsonSerializer.Serialize(valMem));
-}
+var value = await chain.GetValue();
+Console.WriteLine(value.ToString());
 Console.ReadKey();
